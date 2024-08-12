@@ -61,8 +61,8 @@ const getUserWithId = function(id) {
     });
 };
 
-const getUserNotes = (id) => {
-  const queryString = 'SELECT * FROM notes WHERE user_id = $1;'
+const getUserTasks = (id) => {
+  const queryString = 'SELECT * FROM tasks WHERE user_id = $1;'
   const values = [id];
 
   return db
@@ -71,9 +71,9 @@ const getUserNotes = (id) => {
       return response.rows[0];
     })
     .catch((error) => {
-      console.log("getUserNotes error: ", error.message);
+      console.log("getUserTasks error: ", error.message);
       throw error;
     });
 };
 
-module.exports = { getUsers, addUser, getUserWithEmail, getUserWithId, getUserNotes };
+module.exports = { getUsers, addUser, getUserWithEmail, getUserWithId,getUserTasks };
