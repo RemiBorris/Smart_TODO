@@ -21,4 +21,16 @@ router.get('/', (req, res) => {
     });
 });
 
+router.get('/:id/tasks', (req, res) => {
+  userQueries.getTasks()
+    .then((tasks) => {
+      res.json({ tasks }); //array of tasks
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+});
+
 module.exports = router;
