@@ -68,7 +68,7 @@ const getUserTasks = (id) => {
   return db
     .query(queryString, values)
     .then((response) => {
-      return response.rows[0];
+      return response.rows;
     })
     .catch((error) => {
       console.log("getUserTasks error: ", error.message);
