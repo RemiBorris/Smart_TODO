@@ -1,6 +1,6 @@
 const db = require('../connection');
 
-const getCategory = () => {
+const getCategories = () => {
   return db
     .query('SELECT * FROM categories;')
     .then((data) => data.rows)
@@ -10,4 +10,4 @@ const getCategory = () => {
     });
 };
 
-module.exports = { getCategory };
+module.exports = { getCategories };
