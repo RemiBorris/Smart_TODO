@@ -1,0 +1,128 @@
+<!-- User Tasks -->
+
+<!-- RESTFUL routing -- index collection of records or tasks data-->
+    <!-- /users/id/tasks -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Home Page</title>
+
+  <meta charset="UTF-8" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" />
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="/styles/layout.css" />
+  <!-- <link rel="stylesheet" href="/styles/main.css" /> -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js" integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+  <script src="/vendor/jquery-3.0.0.js"></script>
+
+  <script defer src="/scripts/tasks/index.js"></script>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <a class="navbar-brand" href="/" style="margin-left: 2rem; margin-right: 5rem;">Smart TODO List</a>
+        <!-- Home Page button-->
+        <div class="col-8 mt-4 mb-4 align-bottom"; style="color: white">
+          <a class="btn btn-outline-info" href="/" style="margin-left: 2rem; margin-right: 5rem;">Home</a>
+        </div>
+
+        <!-- Edit Profile ... this is-->
+        <div class = "edit-profile">
+          <a class="navbar-brand nav-item" href="/users/:id/edit"> FirstName LastName</a>
+        </div>
+    </nav>
+  </header>
+
+  <main style="margin: 2em;">
+
+    <form action="/" method="POST"> <!-- The action attribute tells the form which URL to submit to. The method attribute tells the form which HTTP method to use when submitting the form. -->
+      <div class="form-group mb-2">
+        <div id="new-task" class="form-group mb-2">
+          <label for="#">What task would you like to complete? </label>
+          <!--name attribute is important, it identifies data we are sending -->
+          <input
+            class="form-control"
+            type="text"
+            name="tasks"
+            placeholder="To Do"
+            style="width: 500px; margin: 1em"
+          />
+
+          <label for="#">Task Description </label>
+          <!--name attribute is important, it identifies data we are sending -->
+            <textarea
+              rows="3"
+              cols="20"
+              wrap="hard"
+              class="form-control"
+              type="text"
+              name="description"
+              placeholder="(optional) ...Default to task (stretch)"
+              style="width: 500px; margin: 1em"
+            >
+            </textarea>
+        </br>
+        <button type="submit" class="btn btn-dark">Submit</button> <!-- The type attribute tells how the button behaves. Type submit will submit the form date to the server. -->
+        &nbsp
+        <button id="cancel-btn" type="submit" class="btn btn-secondary">Cancel</button>
+      </div>
+    </form>
+
+  </br>
+
+
+    <!-- Table of categories -->
+
+    <table class="table" style="color: black; background-color:lightgrey">
+      <thead>
+        <tr>
+          <th scope="col">Films</th>
+          <th scope="col">Restaurant</th>
+          <th scope="col">Buy</th>
+          <th scope="col">Books</th>
+          <th scope="col">Other</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Notes container -->
+
+        <% tasks.forEach((task) => { %>
+          <tr>
+            <td><%= task.name %>
+              <a href="/task/:id/edit" class='btn btn-outline-primary' >Edit</a></td>
+
+            <td><%= task.name %>
+              <a href="/task/:id/edit" class='btn btn-outline-primary' >Edit</a></td>
+
+            <td><%= task.name %>
+                <a href="/task/:id/edit" class='btn btn-outline-primary' >Edit</a></td>
+
+            <td><%= task.name %>
+              <a href="/task/:id/edit" class='btn btn-outline-primary' >Edit</a></td>
+
+            <td><%= task.name %>
+                <a href="/task/:id/edit" class='btn btn-outline-primary' >Edit</a></td>
+
+              </tr>
+        <% }); %>
+      </tbody>
+    </table>
+
+
+
+  </main>
+
+</body>
+
+</html>
