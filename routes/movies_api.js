@@ -41,19 +41,5 @@ function isMovie(title) {
     });
 }
 
-
-
-
-// Test cases
-const testCases = [
-  { title: "Inception", expected: true },
-  { title: "Unknown Movie Title", expected: false },
-  { title: "The Godfather", expected: true },
-  { title: "RandomTitle123", expected: false },
-  { title: "Avatar", expected: true }
-];
-
-testCases.forEach(async (testCase) => {
-  const result = await isMovie(testCase.title);
-  console.log(`Testing" ${testCase.title}: Expected ${testCase.expected}, got ${result}`);
-});
+//export module
+module.exports = { isMovie };
