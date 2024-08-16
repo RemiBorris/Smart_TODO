@@ -66,10 +66,14 @@
           <% for (category_id in categorizedTasks) { %>
             <% categorizedTasks[category_id].forEach((task) => { %>
               <% if (task !== undefined) { %>
-                <td><%= task.name %>
+                <td><%= task.name %> &nbsp
+                  <!-- Edit task -->
                   <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-task="<%= JSON.stringify(task) %>" data-bs-target="#taskModalForm">
                     Edit
-                  </button>
+                  </button> &nbsp
+                  <!-- Task is complete (Radio button)-->
+                  <input class="form-check-input" type="radio" name="is_completed" id="is_completed">
+                  <label class="task-done-label" for="is_completed">Done</label>
                 </td>
               <% } else { %>
                 <td></td>
