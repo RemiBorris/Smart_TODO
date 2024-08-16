@@ -6,7 +6,7 @@ const confirmRestaurant = function (taskName) {
   method: 'GET',
   headers: {
     accept: 'application/json',
-    Authorization: 'Bearer ZveMf7bJu2rZ5J6FNIX-irwmtrzMUP-8CGnFjiIHw-ZKV6H_A_U0t7E7XSg3vnlASv3CRxeYEVPKai2hyX95WKpOaZyoKm62U_J6540g6KJHoZFR9rDfyimo4e28ZnYx'
+    Authorization: process.env.YELP_API_KEY
   }
 };
 // complete busiess search for taskname through yelp
