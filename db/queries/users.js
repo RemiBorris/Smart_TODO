@@ -53,7 +53,7 @@ const getUserWithId = function(id) {
   return db
     .query(queryString, values)
     .then((response) => {
-      return response.rows[0];
+      return response.rows[0]; //return as an object.
     })
     .catch((error) => {
       console.log("getUserWithId error: ", error.message);
