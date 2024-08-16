@@ -6,7 +6,7 @@ const confirmProduct = function (taskName) {
   const options = {
     method: 'GET',
     headers: {
-      'x-rapidapi-key': 'bbc90f77a9msh2395fe01a7bb86cp1fe0c3jsn9eed4e2476e4',
+      'x-rapidapi-key': process.env.AMAZON_API_KEY,
       'x-rapidapi-host': 'real-time-amazon-data.p.rapidapi.com'
     }
   };
