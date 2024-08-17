@@ -33,4 +33,21 @@ router.get('/:id/tasks', (req, res) => {
     });
 });
 
+//Update
+router.post('/:id', (req,res) => {
+  console.log("EDIT PROFILE...")
+  const updatedProfile = req.body;
+
+  userQueries
+    .updateUser(updatedProfile )
+    .then(() => {
+      res.status(204).json();
+    })
+    .catch((err) => {
+      res
+        .status(500)
+        .json({ message: 'Error updating task', error: err.message });
+    });
+  });
+
 module.exports = router;

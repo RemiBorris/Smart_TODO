@@ -76,4 +76,14 @@ const getUserTasks = (id) => {
     });
 };
 
-module.exports = { getUsers, addUser, getUserWithEmail, getUserWithId,getUserTasks };
+const updateUser = (user) => {
+  const queryString = 'UPDATE users SET first_name = $1, last_name = $2, email = $3 WHERE id = $4 RETURNING *;';
+
+  const values = [user.first_name, user.last_name, user.email, user.id];
+
+  return db.query(queryString, values).then((response) => response.rows[0]).catch((error) => { console.log("Edit user profile Error: ", error.message);
+    throw error;
+  })
+}
+
+module.exports = { getUsers, addUser, getUserWithEmail, getUserWithId,getUserTasks, updateUser };

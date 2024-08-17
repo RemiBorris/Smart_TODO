@@ -31,17 +31,19 @@
   <body>
     <header>
       <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-          <a class="navbar-brand" href="/" style="margin-left: 2rem; margin-right: 5rem;">Smart TODO List</a>
-          <!-- Home Page button-->
-          <div class="col-8 mt-4 mb-4 align-bottom"; style="color: white">
-            <button class="btn btn-outline-info home-btn">Home</button>
+        <a class="navbar-brand" href="/" style="margin-left: 2rem; margin-right: 5rem;">Smart TODO List</a>
+        <!-- Home Page button
+        <div class="col-8 mt-4 mb-4 align-bottom"; style="color: white">
+          <button class="btn btn-outline-info home-btn">Home</button>
 
-          </div>
+        </div> -->
 
-          <!-- Edit Profile ... this is-->
-          <div class = "edit-profile">
-            <a class="navbar-brand nav-item" href="/users/<%= user.id %>/edit"><%= user.first_name%> <%= user.last_name%></a>
-          </div>
+        <!-- Edit Profile -->
+        <div class = "navbar-brand mt-4 mb-4 align-left edit-profile" style="margin-left: 55em;">
+          Welcome,
+          <a class="navbar-brand" data-bs-toggle="modal" data-bs-target="#userModalForm" data-user="<%= JSON.stringify(user) %>" href="/users/<%= user.id %>/edit"><%= user.first_name%> <%= user.last_name%>! &nbsp &nbsp <i style="color: gray;"><%= user.email%></i></a>
+        </div>
+
       </nav>
     </header>
 
@@ -62,11 +64,11 @@
                 <li class="list-group-item" style="background: inherit;">
                   <span><%= task.name %></span>
                   <!-- Edit task -->
-                  <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-task="<%= JSON.stringify(task) %>" data-bs-target="#taskModalForm">
+                  <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-task="<%= JSON.stringify(task) %>" data-bs-target="#taskModalForm">
                     Edit
                   </button> &nbsp
                   <!-- Task is complete (Radio button)-->
-                  
+
                   <input class="form-check-input" type="radio" name="is_completed" id="is_completed">
                   <label class="task-done-label" for="is_completed">Done</label>
                 </li>
@@ -76,6 +78,7 @@
         <% }) %>
       </div>
     </main>
+    <%- include('../users/_form', { modalId: 'userModalForm' }) %>
     <%- include('_form', { modalId: 'taskModalForm' }) %>
   </body>
 </html>

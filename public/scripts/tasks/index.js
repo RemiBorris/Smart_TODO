@@ -71,15 +71,56 @@ $(() => {
       alert("Request failed");
     });
 
+  });
+
+  $('.edit-user-btn').click((event) => {
+    event.preventDefault();
+    const user = {
+      id: event.target.dataset.userId,
+      first_name: $('.firstName').val(),
+      last_name: $('.lastName').val(),
+      email: $('.email').val()
+    }
+
+    $.ajax({
+      method: 'POST',
+      url: `/api/users/${event.target.dataset.userId}`,
+      dataType: 'json',
+      data: user,
+    }).done(function(_data) {
+      window.location.reload()
+    }).fail(function(_data) {
+      alert("Request failed");
+    });
+
   })
 
+  //Update User modal
+  userModalForm.addEventListener('show.bs.modal', function(event) {
+    // Button that triggered the modal
+    const button = event.relatedTarget
 
+    // Extract info from data-bs-* attributes
+    const user = JSON.parse(button.getAttribute('data-user'));
+    const firstNameInput = userModalForm.querySelector('.modal-body .firstName'); // _form.ejs
+    const lastNameInput = userModalForm.querySelector('.modal-body .lastName');// _form.ejs
+    const emailInput = userModalForm.querySelector('.modal-body .email');
+    const editUserBtn= userModalForm.querySelector('.modal-body .edit-user-btn');
+
+    // Update user info
+    firstNameInput.value = user.first_name;
+    lastNameInput.value = user.last_name;
+    emailInput.value = user.email;
+    editUserBtn.dataset.userId = user.id;
+  })
+
+  // Update task modal
   taskModalForm.addEventListener('show.bs.modal', function (event) {
     // Button that triggered the modal
     const button = event.relatedTarget
 
     // Extract info from data-bs-* attributes
-    const task = JSON.parse(button.getAttribute('data-bs-task'));
+    const task = JSON.parse(button.getAttribute('data-task'));
     const isUpdate = taskModalForm.querySelector('.modal-content #isUpdate');
     const taskNameInput = taskModalForm.querySelector('.modal-body .taskName'); // _form.ejs
     const taskDescriptionInput = taskModalForm.querySelector('.modal-body .taskDescription');// _form.ejs
