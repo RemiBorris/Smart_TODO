@@ -53,7 +53,7 @@ const getUserWithId = function(id) {
   return db
     .query(queryString, values)
     .then((response) => {
-      return response.rows[0];
+      return response.rows[0]; //return as an object.
     })
     .catch((error) => {
       console.log("getUserWithId error: ", error.message);
@@ -61,19 +61,29 @@ const getUserWithId = function(id) {
     });
 };
 
-const getUserNotes = (id) => {
-  const queryString = 'SELECT * FROM notes WHERE user_id = $1;'
+const getUserTasks = (id) => {
+  const queryString = 'SELECT * FROM tasks WHERE user_id = $1;'
   const values = [id];
 
   return db
     .query(queryString, values)
     .then((response) => {
-      return response.rows[0];
+      return response.rows;
     })
     .catch((error) => {
-      console.log("getUserNotes error: ", error.message);
+      console.log("getUserTasks error: ", error.message);
       throw error;
     });
 };
 
-module.exports = { getUsers, addUser, getUserWithEmail, getUserWithId, getUserNotes };
+const updateUser = (user) => {
+  const queryString = 'UPDATE users SET first_name = $1, last_name = $2, email = $3 WHERE id = $4 RETURNING *;';
+
+  const values = [user.first_name, user.last_name, user.email, user.id];
+
+  return db.query(queryString, values).then((response) => response.rows[0]).catch((error) => { console.log("Edit user profile Error: ", error.message);
+    throw error;
+  })
+}
+
+module.exports = { getUsers, addUser, getUserWithEmail, getUserWithId,getUserTasks, updateUser };
