@@ -21,7 +21,6 @@ $(() => {
     const $usersList = $('#users');
 
     for(const user of response.users) {
-      console.table(user);
       $(`<li><a class="dropdown-item" href="/users/${user.id}/tasks"> ${user.email}</a></li>`).appendTo($usersList);
     }
   });

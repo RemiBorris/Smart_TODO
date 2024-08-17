@@ -1,10 +1,10 @@
 const db = require('../connection');
 
 // C = create/add a new task to do. Insert.
-const createTask = function(task) {
-  const queryString = 'INSERT INTO tasks (user_id, name, description,category_id, is_completed) VALUES ($1, $2, $3, $4, $5) RETURNING *;';
-
-  const values = [task.userId, task.name, task.description, task.category_id];
+const create = function(task) {
+  const queryString = 'INSERT INTO tasks (user_id, name, description,category_id) VALUES ($1, $2, $3, $4) RETURNING *;';
+  console.table(task)
+  const values = [task.user_id, task.name, task.description, task.category_id];
 
   return db.query(queryString, values).then((response) => response.rows[0]).catch((error) => {
     console.log("create Task error: ", error.message);
@@ -71,5 +71,5 @@ const taskDone = (taskId) => {
 
 }
 
-module.exports = {createTask, getTask, updateTask, deleteTask, getAllTask, getTaskWithUserId, taskDone};
+module.exports = {create, getTask, updateTask, deleteTask, getAllTask, getTaskWithUserId, taskDone};
 

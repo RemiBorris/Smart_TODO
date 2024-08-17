@@ -10,22 +10,25 @@
 const express = require('express');
 const router = express.Router();
 const tasksQueries = require('../db/queries/tasks');
-const tasksRoutes = require('./tasks');
+const { autoCategorize } = require('../lib/helper/categorize_task');
 
 //CREATE - POST
-router.post('/', (req, res) =>{
+router.post('/', (req, res) => {
+  const task = req.body;
 
-  tasksQueries
-  .create(task)
-  
-  .then((task) => {
-    res.status(201).json({ message: 'Note created!', task });
-  })
-  .catch((err) => {
-    res
-      .status(500)
-      .json({ message: 'Error creating note', error: err.message });
-  });
+  autoCategorize(task.name)
+    .then((resp) => {
+      task.category_id = resp.category_id
+
+      tasksQueries
+        .create(task)
+        .then((task) => {
+          res.status(201).json({ message: 'Task created!', task });
+        })
+        .catch((err) => {
+          res.status(500).json({ message: 'Error creating task', error: err.message });
+        });
+    })
 });
 
 // Delete
@@ -43,9 +46,8 @@ router.delete('/:id', (req, res) => {
     });
 });
 
-//Update
+//Update / Edit
 router.post('/:id', (req,res) => {
-  console.log("UPDATE...")
   const updatedTask = req.body;
 
   tasksQueries

@@ -43,7 +43,8 @@
           Welcome,
           <a class="navbar-brand" data-bs-toggle="modal" data-bs-target="#userModalForm" data-user="<%= JSON.stringify(user) %>" href="/users/<%= user.id %>/edit"><%= user.first_name%> <%= user.last_name%>! &nbsp &nbsp <i style="color: gray;"><%= user.email%></i></a>
         </div>
-
+        <!-- Injecting the user info -->
+        <input type="hidden" value="<%= JSON.stringify(user) %>" id="currentUser"> </input>
       </nav>
     </header>
 
