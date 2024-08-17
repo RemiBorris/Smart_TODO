@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
 
-const confirmProduct = function (taskName) {
+const isProduct = function (taskName) {
 
   const url = `https://real-time-amazon-data.p.rapidapi.com/search?query=${encodeURIComponent(taskName)}&page=1&country=CA&sort_by=RELEVANCE`;
   const options = {
@@ -10,9 +10,9 @@ const confirmProduct = function (taskName) {
       'x-rapidapi-host': 'real-time-amazon-data.p.rapidapi.com'
     }
   };
-  
+
 // complete busiess search for taskname through yelp
-  fetch(url, options) 
+  fetch(url, options)
     .then(response => response.json())
     .then(response => {
       if (response.data.total_products > 0) {  /*  */
@@ -23,3 +23,6 @@ const confirmProduct = function (taskName) {
     })
     .catch(err => console.error(err));
 }
+
+
+module.exports = { isProduct };

@@ -38,6 +38,7 @@ const registerRoutes = require('./routes/register');
 const tasksRoutes = require('./routes/tasks');
 const tasksApiRoutes = require('./routes/tasks-api');
 const categoriesApiRoutes = require('./routes/categories-api');
+const categorizeTaskRoutes = require('./routes/categorize_task');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -51,6 +52,7 @@ app.use('/register', registerRoutes);
 app.use('/tasks', tasksRoutes);
 app.use('/api/tasks', tasksApiRoutes);
 app.use('/api/categories', categoriesApiRoutes);
+app.use('/categorizeTaskRoutes', categorizeTaskRoutes);
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).

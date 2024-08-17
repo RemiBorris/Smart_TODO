@@ -73,6 +73,28 @@ $(() => {
 
   });
 
+  $('#new-task-btn').click((event) => {
+    event.preventDefault();
+    const task = {
+      id: event.target.dataset.taskId,
+      name: $('.taskName').val(),
+      description: $('.taskDescription').val()
+    }
+
+    $.ajax({
+      method: 'POST',
+      url: `/api/tasks/${event.target.dataset.taskId}`,
+      dataType: 'json',
+      data: task,
+    }).done(function(_data) {
+      window.location.reload()
+    }).fail(function(_data) {
+      alert("Request failed");
+    });
+
+  });
+
+  
   $('.edit-user-btn').click((event) => {
     event.preventDefault();
     const user = {

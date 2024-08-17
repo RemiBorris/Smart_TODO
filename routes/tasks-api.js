@@ -10,12 +10,14 @@
 const express = require('express');
 const router = express.Router();
 const tasksQueries = require('../db/queries/tasks');
+const tasksRoutes = require('./tasks');
 
 //CREATE - POST
 router.post('/', (req, res) =>{
 
   tasksQueries
   .create(task)
+  
   .then((task) => {
     res.status(201).json({ message: 'Note created!', task });
   })

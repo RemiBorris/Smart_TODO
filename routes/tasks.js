@@ -9,7 +9,10 @@
 
 const express = require('express');
 const router  = express.Router();
-
+const booksApi = require('./books_api');
+const moviesApi = require('./movies_api');
+const productsApi = require('./product_api');
+const restaurantsApi = require('./restaurant_api');
 
 
 router.get('/', (req, res) => {
@@ -24,17 +27,8 @@ router.get('/:id/edit', (req, res) => {
 });
 
 router.get('/:id/task', (req, res) => {
-  notesQueries.getNote(req.params.id).then((task) => {
-    const category = {
-      1: "Books",
-      2: "Films/TV Shows",
-      3: "Products",
-      4: "Restaurants",
-      5: "Other"
-    }
-    const currentCategory = category[task["category_id"]] || "";
-    res.render('task', { task, currentCategory })
-  })
+  // autoCategorize(${});
 })
+
 
 module.exports = router;

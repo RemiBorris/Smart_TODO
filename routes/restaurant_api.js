@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
 
-const confirmRestaurant = function (taskName) {
+const isRestaurant = function (taskName) {
 
   const options = {
   method: 'GET',
@@ -21,3 +21,5 @@ const confirmRestaurant = function (taskName) {
     })
     .catch(err => console.error(err));
 }
+
+module.exports = { isRestaurant };
