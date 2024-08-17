@@ -28,7 +28,7 @@ const updateTask = (task) => {
 
   const values = [task.name, task.description, task.category_id, task.id];
 
-  db.query(queryString, values).then((response) => response.rows[0]).catch((error) => { console.log("update Task Error: ", error.message);
+  return db.query(queryString, values).then((response) => response.rows[0]).catch((error) => { console.log("update Task Error: ", error.message);
     throw error;
   })
 };

@@ -51,11 +51,27 @@ $(() => {
     })
   });
 
-  $('.home-btn').click(function(event) {
-    event.preventDefault()
-    window.location.href = '/'
-  });
+  $('.submit-btn').click((event) => {
+    event.preventDefault();
+    const task = {
+      id: event.target.dataset.taskId,
+      category_id: $('#categories-select').val(),
+      description: $('.taskDescription').val(),
+      name: $('.taskName').val()
+    }
 
+    $.ajax({
+      method: 'POST',
+      url: `/api/tasks/${event.target.dataset.taskId}`,
+      dataType: 'json',
+      data: task,
+    }).done(function(_data) {
+      window.location.reload()
+    }).fail(function(_data) {
+      alert("Request failed");
+    });
+
+  })
 
 
   taskModalForm.addEventListener('show.bs.modal', function (event) {
@@ -69,6 +85,7 @@ $(() => {
     const taskDescriptionInput = taskModalForm.querySelector('.modal-body .taskDescription');// _form.ejs
     const taskCategory = taskModalForm.querySelector('.modal-body #categories-select');
     const deleteBtn = taskModalForm.querySelector('.modal-body .delete-btn');
+    const submitBtn = taskModalForm.querySelector('.modal-body .submit-btn');
 
     // Update user's task
     if (task !== null) {
@@ -81,7 +98,9 @@ $(() => {
       isUpdate.value = true
       taskCategory.value = task.category_id;
       deleteBtn.dataset.taskId = task.id;
-      deleteBtn.dataset.userId = task.user_id
+      deleteBtn.dataset.userId = task.user_id;
+      submitBtn.dataset.taskId = task.id;
+      submitBtn.dataset.userId = task.user_id
       $('.category-dropdown, .delete-btn').show();
     } else { // Add a new task
       taskNameInput.value = ''

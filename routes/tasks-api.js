@@ -41,4 +41,21 @@ router.delete('/:id', (req, res) => {
     });
 });
 
+//Update
+router.post('/:id', (req,res) => {
+  console.log("UPDATE...")
+  const updatedTask = req.body;
+
+  tasksQueries
+    .updateTask(updatedTask)
+    .then(() => {
+      res.status(204).json();
+    })
+    .catch((err) => {
+      res
+        .status(500)
+        .json({ message: 'Error updating task', error: err.message });
+    });
+})
+
 module.exports = router;
