@@ -23,4 +23,18 @@ router.get('/:id/edit', (req, res) => {
   res.render('tasks/edit');
 });
 
+router.get('/:id/task', (req, res) => {
+  notesQueries.getNote(req.params.id).then((task) => {
+    const category = {
+      1: "Books",
+      2: "Films/TV Shows",
+      3: "Products",
+      4: "Restaurants",
+      5: "Other"
+    }
+    const currentCategory = category[task["category_id"]] || "";
+    res.render('task', { task, currentCategory })
+  })
+})
+
 module.exports = router;
