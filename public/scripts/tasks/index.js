@@ -9,6 +9,11 @@ $(() => {
   const $categorySelect = $('#categories-select');
   const currentCategoryId = $categorySelect[0].dataset.currentCategoryId;
 
+  $('.home-btn').click(function(event) {
+    event.preventDefault()
+    window.location.href = '/'
+  });
+
   const categoryOption = (category) => {
     console.log("Category: -->>  ", category);
     if (category.id == currentCategoryId) {

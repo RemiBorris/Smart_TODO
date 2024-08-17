@@ -13,19 +13,17 @@ const categoryQueries = require('../db/queries/categories');
 router.get('/:id/tasks', (req, res) => {
   // get the user's list of tasks from dbase using the tasks-api (query to server, retrieve data from the dbase and return as json)
   const userId = req.params.id;
-  const categorizedTasks = {};
+  const categoryWithTasks = [];
 
   userQueries.getUserWithId(userId).then((user) => {
     categoryQueries.getCategories().then((categories) => {
-      userQueries.getUserTasks(user.id).then((tasks) => {
+      userQueries.getUserTasks(user.id).then((userTasks) => {
         categories.forEach((category) => {
-          categorizedTasks[category.id] ||= []
-
-          const task = tasks.find((task) => task.category_id == category.id)
-          categorizedTasks[category.id].push(task)
+          const tasks = userTasks.filter((task) => task.category_id == category.id)
+          categoryWithTasks.push({ ...category, tasks: tasks })
         })
 
-        res.render('tasks/index', { user, categorizedTasks, categories });
+        res.render('tasks/index', { user, categoryWithTasks });
       })
     })
   })

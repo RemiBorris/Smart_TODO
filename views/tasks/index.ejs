@@ -50,40 +50,32 @@
       <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#taskModalForm">
         Add Task
       </button>
-    </br>
-    </br>
-    </br>
-
-      <table class="table" style="color: black; background-color:lightgrey">
-        <thead>
-          <tr>
-            <% categories.forEach((category) => { %>
-              <th scope="col"><%= category.name %></th>
-            <% }); %>
-          </tr>
-        </thead>
-        <tbody>
-          <% for (category_id in categorizedTasks) { %>
-            <% categorizedTasks[category_id].forEach((task) => { %>
-              <% if (task !== undefined) { %>
-                <td><%= task.name %> &nbsp
+      </br>
+      </br>
+      </br>
+      <div style="display: flex; flex-direction: row; justify-content: space-evenly;">
+        <% categoryWithTasks.forEach((category) => { %>
+          <div style="display: flex; flex-direction: column;">
+            <ul class="list-group">
+              <li class="list-group-item" style="background: inherit;"><strong class="text-center"><%= category.name %></strong></li>
+              <% category.tasks.forEach((task) => { %>
+                <li class="list-group-item" style="background: inherit;">
+                  <span><%= task.name %></span>
                   <!-- Edit task -->
                   <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-task="<%= JSON.stringify(task) %>" data-bs-target="#taskModalForm">
                     Edit
                   </button> &nbsp
                   <!-- Task is complete (Radio button)-->
+                  
                   <input class="form-check-input" type="radio" name="is_completed" id="is_completed">
                   <label class="task-done-label" for="is_completed">Done</label>
-                </td>
-              <% } else { %>
-                <td></td>
-              <% } %>
-            <% }) %>
-          <% } %>
-        </tbody>
-      </table>
+                </li>
+              <% }) %>
+            </ul>
+          </div>
+        <% }) %>
+      </div>
     </main>
     <%- include('_form', { modalId: 'taskModalForm' }) %>
   </body>
-
 </html>

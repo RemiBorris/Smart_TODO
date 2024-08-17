@@ -19,6 +19,10 @@ INSERT INTO tasks (user_id, name, description, category_id)
 INSERT INTO tasks (user_id, name, description, category_id)
   VALUES (3, 'Wine', 'to buy a bottle of red wine', 3);
 INSERT INTO tasks (user_id, name, description, category_id)
+  VALUES (3, 'Soda', 'Pepsi', 3);
+INSERT INTO tasks (user_id, name, description, category_id)
+  VALUES (3, 'Ice Cream', 'Vanilla', 3);
+INSERT INTO tasks (user_id, name, description, category_id)
   VALUES (1, 'laundry', 'Only white clothes', 5);
   INSERT INTO tasks (user_id, name, description, category_id)
   VALUES (1, 'Watch 911', 'To watch Starz 911 series', 1);
