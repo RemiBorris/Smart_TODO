@@ -3,4 +3,15 @@
 body,
 html {
   margin: 0;
+  background: rgb(101, 128, 133);
+  background: radial-gradient(circle, rgb(131, 145, 146) 23%, rgba(222, 224, 236, 0.72) 100%);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+textarea {
+   resize: none;
 }
