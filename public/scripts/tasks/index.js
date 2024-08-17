@@ -89,7 +89,7 @@ $(() => {
       alert("Request failed");
     });
   }
-
+  //button eventhandler that saves new task or updated task
   $('.submit-btn').click((event) => {
     event.preventDefault();
 
