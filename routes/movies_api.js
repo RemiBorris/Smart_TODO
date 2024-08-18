@@ -5,7 +5,7 @@ const MoviesApiKey = process.env.MoviesApiKey;
 
 // this function checks if the input is a movie //
 
-function isMovie(title) {
+function isMovieExist(title) {
   //remove 'watch' from title if present
   const cleanedTitle = title.replace(/\bwatch\b/i, '').trim();
   const encodedTitle = encodeURIComponent(cleanedTitle);
