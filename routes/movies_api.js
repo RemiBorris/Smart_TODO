@@ -3,40 +3,36 @@ const axios = require('axios');
 const MoviesApiKey = process.env.MoviesApiKey;
 
 
-//MOVIE API FUNCTION//
+// this function checks if the input is a movie //
 
-function isMovieExists(title) {
-  const encodedTitle = encodeURIComponent(title);
-  const url = `http://www.omdbapi.com/?apikey=${MoviesApiKey}&t=${encodedTitle}`
-
+function isMovie(title) {
+  //remove 'watch' from title if present
+  const cleanedTitle = title.replace(/\bwatch\b/i, '').trim();
+  const encodedTitle = encodeURIComponent(cleanedTitle);
+  const url = `https://api.themoviedb.org/3/search/movie?api_key=${MoviesApiKey}&query=${encodedTitle}`;
   return axios.get(url)
     .then(res => {
       const data = res.data;
-      const movie = data.Title;
-      console.log(movie)
        // Additional checks
-      //  const hasValidResponse = data.Response === 'True';
-      //  const isMovieExistsType = data.Type === 'movie';
-      //  const hasValidYear = data.Year && data.Year.match(/^\d{4}$/); // Ensures it's a 4-digit year
-      //  const hasValidGenre = data.Genre && data.Genre.match(/(Action|Drama|Comedy|Adventure|Horror|Thriller)/i);
-      //  const hasMinimumRating = data.imdbRating && parseFloat(data.imdbRating) > 0;
-      //  const hasDirector = data.Director && data.Director !== 'N/A';
-      //  const hasPlot = data.Plot && data.Plot !== 'N/A';
+       const hasValidResponse = data.Response === 'True';
+       const isMovieType = data.Type === 'movie';
+       const hasValidYear = data.Year && data.Year.match(/^\d{4}$/); // Ensures it's a 4-digit year
+       const hasValidGenre = data.Genre && data.Genre.match(/(Action|Drama|Comedy|Adventure|Horror|Thriller)/i);
+       const hasMinimumRating = data.imdbRating && parseFloat(data.imdbRating) > 0;
+       const hasDirector = data.Director && data.Director !== 'N/A';
+       const hasPlot = data.Plot && data.Plot !== 'N/A';
 
       if (
-        // hasValidResponse &&
-        // isMovieExistsType &&
-        // hasValidYear &&
-        // hasValidGenre &&
-        // hasMinimumRating &&
-        // hasDirector &&
-        // hasPlot
-        movie == title
+        hasValidResponse &&
+        isMovieType &&
+        hasValidYear &&
+        hasValidGenre &&
+        hasMinimumRating &&
+        hasDirector &&
+        hasPlot
       ) {
-        console.log("MOVIE TRUE");
         return true;
       } else {
-        console.log("MOVIE FAlse")
         return false;
       }
     })
@@ -45,6 +41,7 @@ function isMovieExists(title) {
       return false;
     });
 }
+
 
 //export module
 module.exports = { isMovieExists };
