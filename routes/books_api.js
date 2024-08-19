@@ -4,7 +4,6 @@ const axios = require('axios');
 // Function that find books if it exist.
 function isBookExists(title) {
   const encodedTitle = encodeURIComponent(title);
-  //const url = `https://openlibrary.org/search.json?title=${encodedTitle}&limit=10`
   const url = `https://www.googleapis.com/books/v1/volumes?q=${encodedTitle}`
 
   return axios.get(url)
