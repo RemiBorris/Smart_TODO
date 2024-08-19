@@ -14,16 +14,6 @@ router.get('/', (req, res) => {
 
   const lowerCaseTaskName = taskName.toLowerCase()
 
-  if (lowerCaseTaskName.startsWith('watch' || 'binge')) {
-    return category = 2
-  } else if (lowerCaseTaskName.startsWith('read')) {
-    return category = 1
-  } else if (lowerCaseTaskName.startsWith('eat')) {
-    return category = 4
-  } else if (lowerCaseTaskName.startsWith('buy' || 'purchase')) {
-    return category = 3
-  };
-
     Promise.All([isMovie(taskName), isBook(taskName), isRestaurant(taskName), isProduct(taskName)])
       .then((values) => { //values [true, true, false, true]
         if(values[0]) {
@@ -41,4 +31,4 @@ router.get('/', (req, res) => {
 });
 
 
-module.exports = router;
+module.exports = { router, autoCategorize };
