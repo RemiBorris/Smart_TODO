@@ -1,4 +1,8 @@
+require('dotenv').config();
 const axios = require('axios');
+const YELP_API_KEY = process.env.YELP_API_KEY;
+// const axios = require('axios');
+
 
 const isRestaurantExists = function (taskName) {
   const options = {
@@ -10,17 +14,25 @@ const isRestaurantExists = function (taskName) {
   }
 
   // complete busiess search for taskname through yelp
-  const url = `https://api.yelp.com/v3/businesses/search?location=toronto&term=${encodeURIComponent(taskName)}&radius=25000&sort_by=best_match&limit=10`
+  //const url = `https://api.yelp.com/v3/businesses/search?location=Canada&term=${encodeURIComponent(taskName)}&sort_by=best_match&limit=5`
+  const url = `https://api.yelp.com/v3/businesses/search?location=toronto&term=${encodeURIComponent(taskName)}&radius=25000&sort_by=best_match&limit=2`
 
   axios.get(url, options)
     .then(resp => {
       const data = resp.data;
-      const restaurant = data.businesses[0].name;
-      console.log(restaurant);
-      if (restaurant.includes(taskName)) {
-        console.log(restaurant);
+      console.log(data);
+      const restaurant = data.businesses;
+      let result = null;
+
+      if(restaurant.length > 0) {
+        result = restaurant[0].name
+      }
+
+      if (restaurant[0].attributes.menu_url !== null) {
+        console.log("REST TRUE: ", restaurant[0])
         return true;
       } else {
+        console.log("REST FALSE")
         return false;
       }
     })
@@ -41,4 +53,4 @@ const isRestaurantExists = function (taskName) {
 
 module.exports = { isRestaurantExists };
 
-isRestaurantExists("Korean Grill")
+//isRestaurantExists("Tim Hortons");
