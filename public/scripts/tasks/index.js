@@ -37,6 +37,13 @@ $(() => {
     });
   };
 
+  /* WORK IN PROGRESS
+  $('.task-is-done').click((event) => {
+    event.preventDefault();
+
+  });
+  */
+
   $('.delete-btn').click((event) => {
     event.preventDefault();
 

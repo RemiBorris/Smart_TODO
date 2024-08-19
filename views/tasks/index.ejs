@@ -42,7 +42,7 @@
         </div> -->
 
         <!-- Edit Profile -->
-        <div class = "navbar-brand mt-4 mb-4 align-left edit-profile" style="margin-left: 55em;">
+        <div class = "navbar-brand mt-4 mb-4 align-left edit-profile" style="margin-left: 40em;">
           Welcome,
           <a class="navbar-brand" data-bs-toggle="modal" data-bs-target="#userModalForm" data-user="<%= JSON.stringify(user) %>" href="/users/<%= user.id %>/edit"><%= user.first_name%> <%= user.last_name%>! &nbsp &nbsp <i style="color: gray;"><%= user.email%></i></a>
         </div>
@@ -103,7 +103,9 @@
                     <label class="task-done-label" for="is_completed">Done</label> -->
 
                     <!-- Checklist icon  -->
-                    <i class="fa-regular fa-circle-check task-is-done"></i>
+                    <button class="btn btn-outline-secondary task-is-done" type="button">
+                      <i class="fa-regular fa-circle-check"></i>
+                    </button>
 
 
                 <% } %>
