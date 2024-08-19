@@ -8,6 +8,7 @@ $(() => {
   const taskModalForm = document.getElementById('taskModalForm');
   const $categorySelect = $('#categories-select');
   const currentCategoryId = $categorySelect[0].dataset.currentCategoryId;
+  const currentUser = JSON.parse($('#currentUser').val()); //return as object
 
   $('.home-btn').click(function(event) {
     event.preventDefault()
@@ -15,7 +16,6 @@ $(() => {
   });
 
   const categoryOption = (category) => {
-    console.log("Category: -->>  ", category);
     if (category.id == currentCategoryId) {
       return `<option value="${category.id}" selected>${category.name}</option>`
     } else {
@@ -30,7 +30,6 @@ $(() => {
     }).done((response) => {
       $categorySelect.empty();
       for(const category of response.categories) {
-        console.table(category);
         $categorySelect.append(categoryOption(category));
       }
     }).fail((_error) => {
@@ -51,10 +50,9 @@ $(() => {
     })
   });
 
-  $('.submit-btn').click((event) => {
-    event.preventDefault();
+  const updateTask = (target) => {
     const task = {
-      id: event.target.dataset.taskId,
+      id: target.dataset.taskId,
       category_id: $('#categories-select').val(),
       description: $('.taskDescription').val(),
       name: $('.taskName').val()
@@ -62,7 +60,7 @@ $(() => {
 
     $.ajax({
       method: 'POST',
-      url: `/api/tasks/${event.target.dataset.taskId}`,
+      url: `/api/tasks/${target.dataset.taskId}`,
       dataType: 'json',
       data: task,
     }).done(function(_data) {
@@ -70,20 +68,19 @@ $(() => {
     }).fail(function(_data) {
       alert("Request failed");
     });
+  }
 
-  });
-
-  $('#new-task-btn').click((event) => {
-    event.preventDefault();
+  const createTask = (target) => {
     const task = {
-      id: event.target.dataset.taskId,
+      id: target.dataset.taskId,
       name: $('.taskName').val(),
-      description: $('.taskDescription').val()
+      description: $('.taskDescription').val(),
+      user_id: currentUser.id
     }
 
     $.ajax({
       method: 'POST',
-      url: `/api/tasks/${event.target.dataset.taskId}`,
+      url: `/api/tasks`,
       dataType: 'json',
       data: task,
     }).done(function(_data) {
@@ -91,10 +88,20 @@ $(() => {
     }).fail(function(_data) {
       alert("Request failed");
     });
+  }
+  //button eventhandler that saves new task or updated task
+  $('.submit-btn').click((event) => {
+    event.preventDefault();
 
+    const isUpdate = $('#isUpdate').val() === 'true';
+
+    if (isUpdate) {
+      updateTask(event.target)
+    } else {
+      createTask(event.target)
+    }
   });
 
-  
   $('.edit-user-btn').click((event) => {
     event.preventDefault();
     const user = {

@@ -1,26 +1,29 @@
 require('dotenv').config();
 const axios = require('axios');
 
-// this function checks if the book exist.
-function isBook(title) {
+// Function that find books if it exist.
+function isBookExists(title) {
   const encodedTitle = encodeURIComponent(title);
-  const url = `https://openlibrary.org/search.json?q=${encodedTitle}&limit=5`
+  const url = `https://www.googleapis.com/books/v1/volumes?q=${encodedTitle}`
 
   return axios.get(url)
     .then(res => {
-      const data = res.data;
-      if(data.numFound > 0) { //returns true, if matching result is found
+      const data = res.data.items[0].volumeInfo.title
+      console.log("BOOK: ", data)
+      if(data.toLowerCase() == title.toLowerCase()) {
+        console.log("BOOK TRUE:", data);
         return true;
       } else {
-        return false; //return false if nothing is found.
+        console.log("BOOK FALSE");
+        return false;
       }
     })
     .catch(error => {
-      console.error('Error fetching movie data:', error.message);
+      console.error('Error fetching book data:', error.message);
       return false;
     });
 }
 
-//export module
-module.exports = { isBook };
+module.exports = { isBookExists };
+
 

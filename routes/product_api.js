@@ -15,7 +15,7 @@ const isProduct = function (taskName) {
   fetch(url, options)
     .then(response => response.json())
     .then(response => {
-      if (response.data.total_products > 0) {  /*  */
+      if (response.data && response.data.total_products > 0) {  /*  */
         return true;
       } else {
         return false;

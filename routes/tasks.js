@@ -26,9 +26,5 @@ router.get('/:id/edit', (req, res) => {
   res.render('tasks/edit');
 });
 
-router.get('/:id/task', (req, res) => {
-  // autoCategorize(${});
-})
-
 
 module.exports = router;

@@ -1,6 +1,7 @@
+require('dotenv').config();
 const fetch = require('node-fetch');
 
-const isRestaurant = function (taskName) {
+const isRestaurantExists = function (taskName) {
 
   const options = {
   method: 'GET',
@@ -22,4 +23,4 @@ const isRestaurant = function (taskName) {
     .catch(err => console.error(err));
 }
 
-module.exports = { isRestaurant };
+module.exports = { isRestaurantExists };
