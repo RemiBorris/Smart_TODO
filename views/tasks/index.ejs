@@ -72,7 +72,7 @@
                           <i class="fa-regular fa-circle-check"></i>
                         </button>
 
-                        <span><s><%= task.name %></s></span> &nbsp
+                        <span class="task-content"><s><%= task.name %></s></span> &nbsp
 
                         <!-- Edit task -->
                         <button type="button" class="btn btn-outline-primary edit-btn" data-bs-toggle="modal" data-task="<%= JSON.stringify(task) %>" data-bs-target="#taskModalForm">
@@ -98,7 +98,7 @@
                           <i class="fa-regular fa-circle-check"></i>
                         </button>
 
-                        <span><%= task.name %></span>
+                        <span class="task-content"><%= task.name %></span>
 
                         <!-- Edit task -->
                         <button type="button" class="btn btn-outline-primary edit-btn" data-bs-toggle="modal" data-task="<%= JSON.stringify(task) %>" data-bs-target="#taskModalForm">

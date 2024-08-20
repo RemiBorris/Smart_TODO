@@ -11,6 +11,7 @@
   min-width: 250px;
   margin: 0 10px;
   transition: transform 0.2s ease;
+  width: 350px;
 }
 
 .category-column:hover {
@@ -42,6 +43,7 @@
 }
 
 .task-is-done {
+
   margin-right: 10px;
 }
 
@@ -54,4 +56,8 @@
   background-color: rgb(7, 115, 203);
   color: white;
   margin-left: 20px;
+}
+
+.task-content {
+  flex-grow: 1;
 }
