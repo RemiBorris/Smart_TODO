@@ -1,0 +1,57 @@
+.categories-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 20px;
+}
+
+.category-column {
+  display: flex;
+  flex-direction: column;
+  min-width: 250px;
+  margin: 0 10px;
+  transition: transform 0.2s ease;
+}
+
+.category-column:hover {
+  transform: translateY(-5px);
+}
+
+.category-title {
+  background-color: rgb(7, 115, 203);
+  color: white;
+  padding: 10px;
+  border-radius: 8px 8px 0 0;
+  font-weight: bold;
+  text-align: center;
+  font-size: 1.2em;
+}
+
+.task-item {
+  background-color: white;
+  margin-bottom: 5px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.task-item.completed-task {
+  background-color: rgb(169, 249, 169);
+  //optional color change for completed tasks, maybe remove
+}
+
+.task-is-done {
+  margin-right: 10px;
+}
+
+.edit-btn {
+  margin-left: 10px;
+  color: #0177f6;
+}
+
+.add-btn {
+  background-color: rgb(7, 115, 203);
+  color: white;
+  margin-left: 20px;
+}
