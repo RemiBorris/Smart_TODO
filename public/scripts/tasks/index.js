@@ -37,12 +37,20 @@ $(() => {
     });
   };
 
-  /* WORK IN PROGRESS
-  $('.task-is-done').click((event) => {
-    event.preventDefault();
+  $('.task-update-status').click((event) => {
+    const task = JSON.parse(event.currentTarget.getAttribute('data-task'));
 
+    $.ajax({
+      method: 'POST',
+      url: `/api/tasks/${task.id}/updateStatus`,
+      dataType: 'json',
+      data: { id: task.id, is_completed: !task.is_completed },
+    }).done(function(_data) {
+      window.location.reload()
+    }).fail(function(_data) {
+      alert("Request failed");
+    });
   });
-  */
 
   $('.delete-btn').click((event) => {
     event.preventDefault();
@@ -99,6 +107,13 @@ $(() => {
   //button eventhandler that saves new task or updated task
   $('.submit-btn').click((event) => {
     event.preventDefault();
+
+    const taskName = $('.taskName').val();
+
+    if (taskName === undefined || taskName === '') {
+      alert('Task name is required');
+      return
+    }
 
     const isUpdate = $('#isUpdate').val() === 'true';
 
