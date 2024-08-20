@@ -62,55 +62,36 @@
       <div style="display: flex; flex-direction: row; justify-content: space-evenly;">
         <% categoryWithTasks.forEach((category) => { %>
           <div style="display: flex; flex-direction: column;">
-            <ul class="list-group">
+            <ul class="list-group" style="width: 350px;">
               <li class="list-group-item" style="background: inherit;"><strong class="text-center"><%= category.name %></strong></li>
               <% category.tasks.forEach((task) => { %>
+                <li class="list-group-item" style="background: inherit;">
+                  <span>
+                    <% if(task.is_completed) { %>
+                      <s><%= task.name %></s>
+                    <% } else { %>
+                      <%= task.name %>
+                    <% } %>
+                  </span> &nbsp
 
-                <% if(task.is_completed) { %>
-                  <!-- Task is completed -->
-                  <li class="list-group-item" style="background: inherit;">
-                    <span><s><%= task.name %></s></span> &nbsp
+                  <!-- Edit task -->
+                  <button type="button" class="btn btn-outline-primary edit-btn" data-bs-toggle="modal" data-task="<%= JSON.stringify(task) %>" data-bs-target="#taskModalForm">
+                    <i class="fa-regular fa-pen-to-square" style="color: #2f87ca;"></i>
+                  </button>
 
-                    <!-- Edit task -->
-                    <button type="button" class="btn btn-outline-primary edit-btn" data-bs-toggle="modal" data-task="<%= JSON.stringify(task) %>" data-bs-target="#taskModalForm">
-                      <i class="fa-regular fa-pen-to-square" style="color: #2f87ca;"></i>
-                    </button>
-
-                    <!-- Task is complete (Radio button) DONE / COMPLETE-->
-
-                    <!-- Radio Button -->
-                    <!-- <input class="form-check-input" type="radio" name="is_completed" id="is_completed">
-                    <label class="task-done-label" for="is_completed">Done</label> -->
-
-                    <!-- Checklist icon  -->
-                    <!-- <i class="fa-regular fa-circle-check task-is-done"></i> -->
-
-                <% } else { %>
-
-                    <!-- Task not completed -->
-                  <li class="list-group-item" style="background: inherit;">
-                    <span><%= task.name %></span>
-
-                    <!-- Edit task -->
-                    <button type="button" class="btn btn-outline-primary edit-btn" data-bs-toggle="modal" data-task="<%= JSON.stringify(task) %>" data-bs-target="#taskModalForm">
-                      <i class="fa-regular fa-pen-to-square" style="color: #2f87ca;"></i>
-                    </button> &nbsp
-
-                    <!-- Task is complete (Radio button) DONE / COMPLETE-->
-
-                    <!-- Radio Button -->
-                    <!-- <input class="form-check-input" type="radio" name="is_completed" id="is_completed">
-                    <label class="task-done-label" for="is_completed">Done</label> -->
-
-                    <!-- Checklist icon  -->
-                    <button class="btn btn-outline-secondary task-is-done" type="button">
+                  <button
+                    class="task-update-status btn btn-outline-secondary"
+                    type="button"
+                    data-task="<%= JSON.stringify(task) %>"
+                  >
+                    <input type="hidden" value="<%= JSON.stringify(task) %>"></input>
+                    <% if(task.is_completed) { %>
+                      <i class="fa-regular fa-circle-check" style="color: #63E6BE;"></i>
+                    <% } else { %>
                       <i class="fa-regular fa-circle-check"></i>
-                    </button>
-
-
-                <% } %>
-
-
+                    <% } %>
+                  </button>
+                </li>
               <% }) %>
             </ul>
           </div>
