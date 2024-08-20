@@ -10,12 +10,11 @@
   flex-direction: column;
   min-width: 250px;
   margin: 0 10px;
-  transition: transform 0.2s ease;
   width: 350px;
 }
 
-.category-column:hover {
-  transform: translateY(-5px);
+.task-item:hover {
+  transform: translateY(-3px);
 }
 
 .category-title {
@@ -35,6 +34,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  transition: transform 0.2s ease;
 }
 
 .task-item.completed-task {

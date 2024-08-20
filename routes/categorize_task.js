@@ -9,12 +9,22 @@ const restaurantsApi = require('./restaurant_api');
 
 router.get('/', (req, res) => {
 
-  
+
   const autoCategorize = function(taskName) {
 
   const lowerCaseTaskName = taskName.toLowerCase()
 
-    Promise.All([isMovie(taskName), isBook(taskName), isRestaurant(taskName), isProduct(taskName)])
+  if (lowerCaseTaskName.startsWith('watch') || lowerCaseTaskName.startsWith('binge')) {
+    return category = 2
+  } else if (lowerCaseTaskName.startsWith('read')) {
+    return category = 1
+  } else if (lowerCaseTaskName.startsWith('eat')) {
+    return category = 4
+  } else if (lowerCaseTaskName.startsWith('buy') || lowerCaseTaskName.startsWith('purchase')) {
+    return category = 3
+  };
+
+    Promise.all([isMovie(taskName), isBook(taskName), isRestaurant(taskName), isProduct(taskName)])
       .then((values) => { //values [true, true, false, true]
         if(values[0]) {
           return category = 2;
