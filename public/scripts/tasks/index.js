@@ -37,7 +37,6 @@ $(() => {
     });
   };
 
-  /* WORK IN PROGRESS */
   $('.task-update-status').click((event) => {
     const task = JSON.parse(event.currentTarget.getAttribute('data-task'));
 
