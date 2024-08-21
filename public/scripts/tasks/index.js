@@ -144,6 +144,28 @@ $(() => {
       email: $('.email').val()
     }
 
+    //Guard clauses to prevents empty field
+    const firstName = $('.firstName').val();
+    if (firstName.trim() === undefined || firstName.trim() === '') {
+      $('.firstName').focus();
+      alert('First name is required');
+      return;
+    }
+
+    const lastName = $('.lastName').val();
+    if (lastName.trim() === undefined || lastName.trim() === '') {
+      $('.lastName').focus();
+      alert('last name is required');
+      return;
+    }
+
+    const editEmail = $('.email').val();
+    if (editEmail.trim() === undefined || editEmail.trim() === '') {
+      $('.email').focus();
+      alert('email is required');
+      return;
+    }
+
     $.ajax({
       method: 'POST',
       url: `/api/users/${event.target.dataset.userId}`,
