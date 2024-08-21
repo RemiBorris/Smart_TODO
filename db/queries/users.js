@@ -62,7 +62,7 @@ const getUserWithId = function(id) {
 };
 
 const getUserTasks = (id) => {
-  const queryString = 'SELECT * FROM tasks WHERE user_id = $1 ORDER BY is_completed = true;'
+  const queryString = 'SELECT * FROM tasks WHERE user_id = $1 ORDER BY is_completed = true, id;'
   const values = [id];
 
   return db
