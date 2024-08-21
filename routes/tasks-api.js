@@ -62,4 +62,20 @@ router.post('/:id', (req,res) => {
     });
 })
 
+//Update Task Status (is_complete)
+router.post('/:id/updateStatus', (req, res) => {
+  const task = req.body;
+
+  tasksQueries
+    .updateStatus(task)
+    .then(() => {
+      res.status(204).json();
+    })
+    .catch((err) => {
+      res
+        .status(500)
+        .json({ message: 'Error updating task', error: err.message });
+    });
+})
+
 module.exports = router;

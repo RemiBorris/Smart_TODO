@@ -36,13 +36,21 @@ $(() => {
       alert("Request Failed!");
     });
   };
-
-  /* WORK IN PROGRESS
+  //Task Status toggle (is_completed === true || is_completed === false)
   $('.task-is-done').click((event) => {
-    event.preventDefault();
+    const task = JSON.parse(event.currentTarget.getAttribute('data-task'));
 
+    $.ajax({
+      method: 'POST',
+      url: `/api/tasks/${task.id}/updateStatus`,
+      dataType: 'json',
+      data: { id: task.id, is_completed: !task.is_completed },
+    }).done(function(_data) {
+      window.location.reload()
+    }).fail(function(_data) {
+      alert("Request failed");
+    });
   });
-  */
 
   $('.delete-btn').click((event) => {
     event.preventDefault();

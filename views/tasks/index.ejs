@@ -67,9 +67,15 @@
                       <!-- Task is completed -->
                       <li class="list-group-item task-item completed-task">
 
-                        <!-- Checklist icon  -->
-                        <button id="mark-incomplete" class="btn btn-outline-secondary task-is-done" type="button">
-                          <i class="fa-regular fa-circle-check"></i>
+                        <!-- Task Status icon  -->
+                        <button class="btn btn-outline-secondary task-is-done" type="button" data-task="<%= JSON.stringify(task) %>" >
+                          <input type="hidden" value="<%= JSON.stringify(task) %>"></input>
+
+                          <% if(task.is_completed) { %>
+                            <i class="fa-regular fa-circle-check" style="color: #63E6BE;"></i>
+                          <% } else { %>
+                            <i class="fa-regular fa-circle-check"></i>
+                          <% } %>
                         </button>
 
                         <span class="task-content"><s><%= task.name %></s></span> &nbsp
@@ -78,15 +84,22 @@
                         <button type="button" class="btn btn-outline-primary edit-btn" data-bs-toggle="modal" data-task="<%= JSON.stringify(task) %>" data-bs-target="#taskModalForm">
                           <i class="fa-regular fa-pen-to-square"></i>
                         </button>
+                      </li>
 
                     <% } else { %>
 
                         <!-- Task not completed -->
                       <li class="list-group-item task-item">
 
-                        <!-- Checklist icon  -->
-                        <button id="mark-complete " class="btn btn-outline-secondary task-is-done" type="button">
-                          <i class="fa-regular fa-circle-check"></i>
+                        <!-- Task Status icon  -->
+                        <button class="btn btn-outline-secondary task-is-done" type="button" data-task="<%= JSON.stringify(task) %>" >
+                          <input type="hidden" value="<%= JSON.stringify(task) %>"></input>
+
+                          <% if(task.is_completed) { %>
+                            <i class="fa-regular fa-circle-check" style="color: #63E6BE;"></i>
+                          <% } else { %>
+                            <i class="fa-regular fa-circle-check"></i>
+                          <% } %>
                         </button>
 
                         <span class="task-content"><%= task.name %></span>
@@ -95,6 +108,7 @@
                         <button type="button" class="btn btn-outline-primary edit-btn" data-bs-toggle="modal" data-task="<%= JSON.stringify(task) %>" data-bs-target="#taskModalForm">
                           <i class="fa-regular fa-pen-to-square"></i>
                         </button> &nbsp
+                      </li>
 
                     <% } %>
 
