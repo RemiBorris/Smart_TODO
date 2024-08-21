@@ -74,6 +74,9 @@ $(() => {
       window.location.reload()
     }).fail(function(_data) {
       alert("Request failed");
+    }).always(() => {
+      $('#submit-task-btn').attr('disabled', false);
+      $('#submit-task-btn').innerHTML = 'Submit';
     });
   }
 
@@ -94,11 +97,16 @@ $(() => {
       window.location.reload()
     }).fail(function(_data) {
       alert("Request failed");
+    }).always(() => {
+      $('#submit-task-btn').attr('disabled', false);
+      $('#submit-task-btn').innerHTML = 'Submit';
     });
   }
   //button eventhandler that saves new task or updated task
   $('.submit-btn').click((event) => {
     event.preventDefault();
+    event.target.disabled = true; //disable the submit btn to prevent spamming the server for multiple request.
+    event.target.innerHTML = 'Submitting....'
 
     const isUpdate = $('#isUpdate').val() === 'true';
 
