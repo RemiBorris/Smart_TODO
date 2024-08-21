@@ -113,6 +113,16 @@ $(() => {
   //button eventhandler that saves new task or updated task
   $('.submit-btn').click((event) => {
     event.preventDefault();
+
+    //Preventing empty task input
+    const taskName = $('.taskName').val();
+    if (taskName.trim() === undefined || taskName.trim() === '') {
+      $('.taskName').focus();
+      alert('Task name is required');
+      return;
+    }
+
+    //Preventing spamming the input field
     event.target.disabled = true; //disable the submit btn to prevent spamming the server for multiple request.
     event.target.innerHTML = 'Submitting....'
 
