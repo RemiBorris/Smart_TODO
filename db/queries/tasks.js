@@ -54,22 +54,12 @@ const getTaskWithUserId = (userId) => {
   return db.query('SELECT * FROM tasks WHERE user_id = $1;', [userId]);
 }
 
-//Task done
-const taskDone = (taskId) => {
-  return db
-    .query('UPDATE tasks SET is_completed = true WHERE id = $1 RETURNING *;', [taskId])
-    .then((result) => {
-      if (result.rows.length > 0) {
-        return result.rows;
-      } else {
-        return null;
-      }
-    })
-    .catch((error) => {
-      console.log(error.message);
-    });
-
+//Task status (is_complete)
+const updateStatus = (task) => {
+  return db.query('UPDATE tasks SET is_completed = $1 WHERE id = $2 RETURNING *;', [task.is_completed, task.id]).then((response) => response.rows[0]).catch((error) => { console.log("update Task Error: ", error.message);
+    throw error;
+  })
 }
 
-module.exports = {create, getTask, updateTask, deleteTask, getAllTask, getTaskWithUserId, taskDone};
+module.exports = {create, getTask, updateTask, deleteTask, getAllTask, getTaskWithUserId, updateStatus};
 
